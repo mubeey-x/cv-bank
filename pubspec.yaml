@@ -29,6 +29,7 @@ dependencies:
   # Intake: pick a CV file or photograph a paper one
   file_picker:
   image_picker:
+  flutter_svg: ^2.3.0
 
   # Document viewer and file handling
   pdfrx:
@@ -47,6 +48,7 @@ dependencies:
   connectivity_plus:
   internet_connection_checker_plus:
   flutter_dotenv: ^6.0.1
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
   flutter_test:
@@ -58,3 +60,5 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/images/
+    - assets/icons/
