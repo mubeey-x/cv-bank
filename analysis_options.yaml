@@ -1,0 +1,38 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+    strict-inference: true
+  errors:
+    invalid_assignment: error
+    invalid_override: error
+    missing_required_param: error
+    missing_return: error
+    dead_code: warning
+    unused_import: warning
+    camel_case_types: warning
+    constant_identifier_names: error
+    avoid_types_as_parameter_names: error
+    avoid_void_async: warning
+    unused_local_variable: warning
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    avoid_print: true
+    use_key_in_widget_constructors: true
+    avoid_dynamic_calls: true
+    always_declare_return_types: true
+    sized_box_for_whitespace: true
+    prefer_final_fields: true
+    prefer_const_literals_to_create_immutables: true
+    avoid_unnecessary_containers: true
+    avoid_unused_constructor_parameters: true
+    camel_case_extensions: true
+    camel_case_types: true
+    constant_identifier_names: true
+    avoid_types_as_parameter_names: true
+    avoid_void_async: true
+    avoid_single_cascade_in_expression_statements: true

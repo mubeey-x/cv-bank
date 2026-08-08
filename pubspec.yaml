@@ -1,0 +1,57 @@
+name: cv_bank
+description: "Private CV bank with categories, employment tracking and stats."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # State management and dependency injection
+  flutter_riverpod:
+
+  # Functional error handling, the Either<Failure, T> in every repository
+  fpdart:
+
+  # Backend: auth, postgres, storage
+  supabase_flutter:
+
+  # Navigation
+  go_router:
+
+  # Date formatting on the dashboard
+  intl:
+
+  # Intake: pick a CV file or photograph a paper one
+  file_picker:
+  image_picker:
+
+  # Document viewer and file handling
+  pdfrx:
+  path:
+  path_provider:
+  open_filex:
+  share_plus:
+
+  # Dashboard charts
+  fl_chart:
+
+  # Offline cache for the people list
+  sqflite:
+
+  # Connectivity check in the repository layer
+  connectivity_plus:
+  internet_connection_checker_plus:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mocktail:
+
+flutter:
+  uses-material-design: true
