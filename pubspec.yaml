@@ -46,6 +46,7 @@ dependencies:
   # Connectivity check in the repository layer
   connectivity_plus:
   internet_connection_checker_plus:
+  flutter_dotenv: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -55,3 +56,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env
