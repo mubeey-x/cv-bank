@@ -61,3 +61,17 @@ final class UnknownFailure extends Failure {
     super.message = 'Something went wrong. Please try again.',
   ]);
 }
+
+/// Login screen should offer to resend the code and route to OTP.
+final class EmailNotConfirmedFailure extends Failure {
+  const EmailNotConfirmedFailure([
+    super.message = 'Confirm your email to continue.',
+  ]);
+}
+
+/// Register screen should offer a link to sign in.
+final class AccountExistsFailure extends Failure {
+  const AccountExistsFailure([
+    super.message = 'An account with this email already exists.',
+  ]);
+}
