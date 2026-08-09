@@ -1,4 +1,4 @@
-import 'package:cv_bank/core/app_config.dart';
+import 'package:cv_bank/core/config/app_config.dart';
 import 'package:cv_bank/cv_bank_pp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
