@@ -26,7 +26,7 @@ class CvBottomNav extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 12.0, bottom: 16.0),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.onPrimary,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
@@ -99,7 +99,7 @@ class _BottomNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isSelected ? AppColors.primary500 : AppColors.subText2;
+    final color = isSelected ? AppColors.primary : AppColors.primaryLight;
 
     return InkWell(
       onTap: onTap,
