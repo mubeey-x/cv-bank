@@ -1,4 +1,4 @@
-import 'package:cv_bank/core/common/cv_bottom_nav.dart';
+import 'package:cv_bank/core/common/widgets/cv_bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

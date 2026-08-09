@@ -6,65 +6,83 @@ import 'package:cv_bank/core/common/widgets/app_text_field.dart';
 import 'package:cv_bank/core/error/failures.dart';
 import 'package:cv_bank/core/routes/routes.dart';
 import 'package:cv_bank/core/theme/app_palette.dart';
+import 'package:cv_bank/features/auth/domain/entities/sign_up_outcome.dart';
 import 'package:cv_bank/features/auth/presentation/controllers/auth_controllers.dart';
 import 'package:cv_bank/features/auth/presentation/widgets/auth_widgets.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key, this.returnTo});
-
-  /// Path the user was heading for before being bounced to login.
-  final String? returnTo;
+class RegisterScreen extends ConsumerStatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
+  final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  final _passwordFocus = FocusNode();
 
   bool get _canSubmit =>
-      _email.text.trim().isNotEmpty && _password.text.isNotEmpty;
+      _name.text.trim().isNotEmpty &&
+      _email.text.trim().isNotEmpty &&
+      _password.text.length >= 8;
 
   @override
   void dispose() {
+    _name.dispose();
     _email.dispose();
     _password.dispose();
-    _passwordFocus.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
 
-    final ok = await ref
-        .read(loginControllerProvider.notifier)
-        .submit(email: _email.text, password: _password.text);
+    final outcome = await ref
+        .read(registerControllerProvider.notifier)
+        .submit(name: _name.text, email: _email.text, password: _password.text);
 
-    if (!ok || !mounted) return;
+    if (outcome == null || !mounted) return;
 
-    // The router's redirect will move us anyway once the session
-    // lands, but going explicitly keeps the deep link intact.
-    context.go(widget.returnTo ?? AppRoutes.dashboard);
+    switch (outcome) {
+      case SignUpOutcome.verificationRequired:
+        context.push(
+          '${AppRoutes.verifyOtp}'
+          '?email=${Uri.encodeComponent(_email.text.trim().toLowerCase())}',
+        );
+      case SignUpOutcome.signedIn:
+        context.go(AppRoutes.dashboard);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(loginControllerProvider);
+    final state = ref.watch(registerControllerProvider);
     final failure = state.hasError ? state.error as Failure? : null;
     final isLoading = state.isLoading;
+    final theme = Theme.of(context);
 
     return AuthScaffold(
-      showWordmark: true,
-      title: 'Welcome back',
-      subtitle: 'Sign in to reach your list.',
+      title: 'Create your account',
+      subtitle: 'Your list stays private to you.',
       footer: AuthFooterLink(
-        prompt: 'New here?',
-        action: 'Create an account',
-        onTap: () => context.push(AppRoutes.register),
+        prompt: 'Have an account?',
+        action: 'Sign in',
+        onTap: () => context.pop(),
       ),
       children: [
+        AppTextField(
+          label: 'Name',
+          controller: _name,
+          hint: 'Your full name',
+          textCapitalization: TextCapitalization.words,
+          keyboardType: TextInputType.name,
+          autofillHints: const [AutofillHints.name],
+          enabled: !isLoading,
+          onChanged: (_) => setState(() {}),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+
         AppTextField(
           label: 'Email',
           controller: _email,
@@ -73,7 +91,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           autofillHints: const [AutofillHints.email],
           enabled: !isLoading,
           onChanged: (_) => setState(() {}),
-          onSubmitted: (_) => _passwordFocus.requestFocus(),
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -82,52 +99,41 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           controller: _password,
           obscure: true,
           textInputAction: TextInputAction.done,
-          autofillHints: const [AutofillHints.password],
+          helper: 'At least 8 characters',
+          autofillHints: const [AutofillHints.newPassword],
           enabled: !isLoading,
           onChanged: (_) => setState(() {}),
           onSubmitted: (_) => _canSubmit ? _submit() : null,
-        ),
-        const SizedBox(height: AppSpacing.sm + 2),
-
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: isLoading
-                ? null
-                : () => context.push(AppRoutes.forgotPassword),
-            style: TextButton.styleFrom(
-              minimumSize: Size.zero,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            child: const Text('Forgot password?'),
-          ),
         ),
         const SizedBox(height: AppSpacing.xl),
 
         AuthErrorBanner(
           failure: failure,
-          action: failure is EmailNotConfirmedFailure
+          action: failure is AccountExistsFailure
               ? TextButton(
-                  onPressed: () => context.push(
-                    '${AppRoutes.verifyOtp}'
-                    '?email=${Uri.encodeComponent(_email.text.trim())}',
-                  ),
+                  onPressed: () => context.pop(),
                   style: TextButton.styleFrom(
                     minimumSize: Size.zero,
                     padding: EdgeInsets.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     foregroundColor: AppColors.destructiveInk,
                   ),
-                  child: const Text('Enter your confirmation code'),
+                  child: const Text('Sign in instead'),
                 )
               : null,
         ),
 
         AuthSubmitButton(
-          label: 'Sign in',
+          label: 'Create account',
           isLoading: isLoading,
           onPressed: _canSubmit ? _submit : null,
+        ),
+        const SizedBox(height: AppSpacing.md + 2),
+
+        Text(
+          'By continuing you agree to the Terms and Privacy Policy.',
+          textAlign: TextAlign.center,
+          style: theme.textTheme.bodySmall,
         ),
       ],
     );

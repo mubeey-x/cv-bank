@@ -202,10 +202,7 @@ final getCurrentAccountProvider =
 typedef GetCurrentAccountRef = AutoDisposeProviderRef<GetCurrentAccount>;
 String _$authStateHash() => r'19bfb3ab729919b8b6b083302e60fe60a640bb26';
 
-/// The signed-in account, or null. The router's redirect reads this,
-/// and the profile screen and dashboard greeting use it for the name.
-///
-/// Copied from [authState].
+/// See also [authState].
 @ProviderFor(authState)
 final authStateProvider = StreamProvider<Account?>.internal(
   authState,
