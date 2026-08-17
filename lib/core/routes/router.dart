@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cv_bank/core/routes/cv_main_app_shell.dart';
 import 'package:cv_bank/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:cv_bank/features/auth/presentation/screens/registration_screen.dart';
+import 'package:cv_bank/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cv_bank/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:cv_bank/features/onboarding/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -229,10 +230,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.dashboard,
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: Text('Dashboard')),
-                  body: Center(child: Text('Dashboard Screen')),
-                ),
+                builder: (context, state) => const DashboardScreen(),
               ),
             ],
           ),

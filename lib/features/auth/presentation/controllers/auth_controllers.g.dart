@@ -59,7 +59,7 @@ final verifyOtpControllerProvider =
     );
 
 typedef _$VerifyOtpController = AutoDisposeAsyncNotifier<void>;
-String _$resendCooldownHash() => r'bf7914d8ac87de028c1ecb621b5fb05607cb7ea3';
+String _$resendCooldownHash() => r'629c4631f4f6af5149515ca162e2a4a9d35aac8e';
 
 /// Counts down the resend cooldown. Supabase rate limits resends, so
 /// the button has to be disabled for a while or users hit the limit
