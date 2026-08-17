@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:cv_bank/core/routes/cv_main_app_shell.dart';
 import 'package:cv_bank/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:cv_bank/features/auth/presentation/screens/registration_screen.dart';
+import 'package:cv_bank/features/categories/presentation/screens/category_detail_screen.dart';
+import 'package:cv_bank/features/categories/presentation/screens/category_list_screen.dart';
 import 'package:cv_bank/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cv_bank/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:cv_bank/features/onboarding/presentation/screens/splash_screen.dart';
@@ -269,21 +271,13 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.categories,
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: Text('Categories')),
-                  body: Center(child: Text('Categories Screen')),
-                ),
+                builder: (context, state) => const CategoryListScreen(),
                 routes: [
                   GoRoute(
                     path: ':id',
-                    builder: (context, state) =>
-                        // CategoryDetailScreen(
-                        //   categoryId: state.pathParameters['id']!,
-                        // ),
-                        Scaffold(
-                          appBar: AppBar(title: Text('Category Detail')),
-                          body: Center(child: Text('Category Detail Screen')),
-                        ),
+                    builder: (context, state) => CategoryDetailScreen(
+                      categoryId: state.pathParameters['id']!,
+                    ),
                   ),
                 ],
               ),
