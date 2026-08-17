@@ -31,8 +31,6 @@ class AuthScaffold extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              // Keeps the footer pinned low on tall screens but lets
-              // it scroll once the keyboard is up.
               padding: EdgeInsets.only(
                 left: AppSpacing.xl,
                 right: AppSpacing.xl,
@@ -67,7 +65,7 @@ class AuthScaffold extends StatelessWidget {
                     ...children,
                     if (footer != null) ...[
                       const SizedBox(height: AppSpacing.xl),
-                      const Spacer(),
+
                       footer!,
                     ],
                   ],

@@ -27,7 +27,7 @@ dependencies:
   intl:
 
   # Intake: pick a CV file or photograph a paper one
-  file_picker:
+  file_picker: 10.3.8
   image_picker:
   flutter_svg: ^2.3.0
 
@@ -36,7 +36,7 @@ dependencies:
   path:
   path_provider:
   open_filex:
-  share_plus:
+  share_plus: ^12.0.2
 
   # Dashboard charts
   fl_chart:

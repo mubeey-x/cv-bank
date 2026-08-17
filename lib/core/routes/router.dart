@@ -1,12 +1,17 @@
 import 'dart:async';
 
 import 'package:cv_bank/core/routes/cv_main_app_shell.dart';
+import 'package:cv_bank/features/auth/presentation/screens/forget_password_screen.dart';
+import 'package:cv_bank/features/auth/presentation/screens/registration_screen.dart';
+import 'package:cv_bank/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:cv_bank/features/onboarding/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'package:cv_bank/features/auth/presentation/screens/login_screen.dart';
+import 'package:cv_bank/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:cv_bank/core/routes/routes.dart';
 
 // =====================================================================
@@ -137,11 +142,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       // ---------------------------------------------------------------
       GoRoute(
         path: AppRoutes.splash,
-        builder: (context, state) => const Scaffold(),
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: AppRoutes.onboarding,
-        builder: (context, state) => const Scaffold(),
+        builder: (context, state) => const OnboardingScreen(),
       ),
 
       // ---------------------------------------------------------------
@@ -150,36 +155,21 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.login,
         builder: (context, state) =>
-            //(returnTo: state.uri.queryParameters['from']),
-            Scaffold(
-              appBar: AppBar(title: Text('Login')),
-              body: Center(child: Text('Login Screen')),
-            ),
+            LoginScreen(returnTo: state.uri.queryParameters['from']),
       ),
       GoRoute(
         path: AppRoutes.register,
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: Text('Register')),
-          body: Center(child: Text('Register Screen')),
-        ),
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: AppRoutes.forgotPassword,
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: Text('Forgot Password')),
-          body: Center(child: Text('Forgot Password Screen')),
-        ),
+        builder: (context, state) => const ForgotPasswordScreen(),
       ),
       GoRoute(
         path: AppRoutes.verifyOtp,
         builder: (context, state) =>
-            //VerifyOtpScreen(email: state.uri.queryParameters['email'] ?? ''),
-            Scaffold(
-              appBar: AppBar(title: Text('Verify OTP')),
-              body: Center(child: Text('Verify OTP Screen')),
-            ),
+            VerifyOtpScreen(email: state.uri.queryParameters['email'] ?? ''),
       ),
-
       // ---------------------------------------------------------------
       // Full screen routes, above the bottom nav
       // ---------------------------------------------------------------

@@ -1,4 +1,5 @@
 import 'package:cv_bank/features/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 
 import 'package:cv_bank/core/error/exceptions.dart';
@@ -90,7 +91,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   Failure _translate(String raw) {
     final m = raw.toLowerCase();
-
+    debugPrint('AUTH RAW: $raw');
     if (m.contains('invalid login credentials')) {
       // Deliberately vague. Saying which half was wrong tells an
       // attacker which emails are registered.

@@ -49,7 +49,7 @@ final class NotFoundFailure extends Failure {
 }
 
 final class FileFailure extends Failure {
-  const FileFailure([super.message = 'Could not open that file.']);
+  const FileFailure([super.message = 'open that file.']);
 }
 
 final class ValidationFailure extends Failure {
