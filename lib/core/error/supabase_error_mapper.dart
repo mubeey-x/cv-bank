@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'exceptions.dart';
 
@@ -19,6 +20,7 @@ Future<T> mapSupabaseErrors<T>(Future<T> Function() action) async {
   } on SocketException catch (e) {
     throw NetworkException(e.message);
   } catch (e) {
+    debugPrint('SUPABASE RAW: $e');
     throw ServerException(e.toString(), cause: e);
   }
 }

@@ -8,6 +8,11 @@ import 'package:cv_bank/features/categories/presentation/screens/category_list_s
 import 'package:cv_bank/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cv_bank/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:cv_bank/features/onboarding/presentation/screens/splash_screen.dart';
+import 'package:cv_bank/features/people/domain/entities/person_document.dart';
+import 'package:cv_bank/features/people/presentation/screens/add_person_screen.dart';
+import 'package:cv_bank/features/people/presentation/screens/edit_person_screen.dart';
+import 'package:cv_bank/features/people/presentation/screens/person_detail_screen.dart';
+import 'package:cv_bank/features/people/presentation/screens/person_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -179,37 +184,21 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.peopleCreate,
         parentNavigatorKey: _rootKey,
-        builder: (context, state) =>
-            //AddPersonScreen(
-            //categoryId: state.uri.queryParameters['categoryId'],
-            // ),
-            Scaffold(
-              appBar: AppBar(title: Text('Add Person')),
-              body: Center(child: Text('Add Person Screen')),
-            ),
+        builder: (context, state) => AddPersonScreen(
+          categoryId: state.uri.queryParameters['categoryId'],
+        ),
       ),
       GoRoute(
         path: AppRoutes.peopleDocument,
         parentNavigatorKey: _rootKey,
         builder: (context, state) =>
-            // DocumentViewerScreen(
-            //   personId: state.pathParameters['id']!,
-            //   documentId: state.pathParameters['documentId']!,
-            // ),
-            Scaffold(
-              appBar: AppBar(title: Text('Document Viewer')),
-              body: Center(child: Text('Document Viewer Screen')),
-            ),
+            DocumentViewerScreen(document: state.extra as PersonDocument),
       ),
       GoRoute(
         path: AppRoutes.peopleEdit,
         parentNavigatorKey: _rootKey,
         builder: (context, state) =>
-            // PersonEditScreen(personId: state.pathParameters['id']!),
-            Scaffold(
-              appBar: AppBar(title: Text('Edit Person')),
-              body: Center(child: Text('Edit Person Screen')),
-            ),
+            PersonEditScreen(personId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: AppRoutes.profileEdit,
@@ -242,24 +231,16 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.people,
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: Text('People')),
-                  body: Center(child: Text('People Screen')),
-                ),
+                builder: (context, state) => PersonListScreen(),
                 routes: [
                   // Child paths are relative. This resolves to /people/:id
                   // and is safe because /people/create is registered above
                   // on the root navigator.
                   GoRoute(
                     path: ':id',
-                    builder: (context, state) =>
-                        // PersonDetailScreen(
-                        //   personId: state.pathParameters['id']!,
-                        // ),
-                        Scaffold(
-                          appBar: AppBar(title: Text('Person Detail')),
-                          body: Center(child: Text('Person Detail Screen')),
-                        ),
+                    builder: (context, state) => PersonDetailScreen(
+                      personId: state.pathParameters['id']!,
+                    ),
                   ),
                 ],
               ),

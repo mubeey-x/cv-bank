@@ -69,7 +69,7 @@ final categoryListControllerProvider =
     );
 
 typedef _$CategoryListController = AutoDisposeAsyncNotifier<List<Category>>;
-String _$categoryActionsHash() => r'f46459bc3e59bebd6a853a9a25f4a97e13da4330';
+String _$categoryActionsHash() => r'b901999fe9601ecb714ec18170e76444a744c393';
 
 /// Every write goes through here. Each method returns a Failure or
 /// null, so the sheet can show an inline error instead of the screen
