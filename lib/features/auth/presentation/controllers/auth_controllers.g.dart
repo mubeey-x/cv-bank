@@ -115,5 +115,22 @@ final signOutControllerProvider =
     );
 
 typedef _$SignOutController = AutoDisposeAsyncNotifier<void>;
+String _$deleteAccountControllerHash() =>
+    r'b6566daff6ad83db946c5bbae3b7faf1bbf66a23';
+
+/// See also [DeleteAccountController].
+@ProviderFor(DeleteAccountController)
+final deleteAccountControllerProvider =
+    AutoDisposeAsyncNotifierProvider<DeleteAccountController, void>.internal(
+      DeleteAccountController.new,
+      name: r'deleteAccountControllerProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deleteAccountControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$DeleteAccountController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

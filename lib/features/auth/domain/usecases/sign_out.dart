@@ -26,6 +26,15 @@ class UpdateAccountName implements UseCase<Account, String> {
   }
 }
 
+class DeleteAccount implements UseCase<Unit, NoParams> {
+  final AuthRepository repository;
+  const DeleteAccount(this.repository);
+
+  @override
+  Future<Either<Failure, Unit>> call(NoParams params) =>
+      repository.deleteAccount();
+}
+
 /// Deliberately does NOT implement UseCase. Reading the restored
 /// session is synchronous and cannot fail, so wrapping it in a
 

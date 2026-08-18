@@ -13,6 +13,8 @@ import 'package:cv_bank/features/people/presentation/screens/add_person_screen.d
 import 'package:cv_bank/features/people/presentation/screens/edit_person_screen.dart';
 import 'package:cv_bank/features/people/presentation/screens/person_detail_screen.dart';
 import 'package:cv_bank/features/people/presentation/screens/person_list_screen.dart';
+import 'package:cv_bank/features/profile/presentation/screens/profile_edit_screen.dart';
+import 'package:cv_bank/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -203,10 +205,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.profileEdit,
         parentNavigatorKey: _rootKey,
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: Text('Edit Profile')),
-          body: Center(child: Text('Edit Profile Screen')),
-        ),
+        builder: (context, state) => const ProfileEditScreen(),
       ),
 
       // ---------------------------------------------------------------
@@ -270,10 +269,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.profile,
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: Text('Profile')),
-                  body: Center(child: Text('Profile Screen')),
-                ),
+                builder: (context, state) => const ProfileScreen(),
               ),
             ],
           ),

@@ -264,3 +264,18 @@ class SignOutController extends _$SignOutController {
     );
   }
 }
+
+@riverpod
+class DeleteAccountController extends _$DeleteAccountController {
+  @override
+  FutureOr<void> build() {}
+
+  Future<void> deleteAccount() async {
+    state = const AsyncLoading();
+    final result = await ref.read(deleteAccountProvider).call(const NoParams());
+    state = result.fold(
+      (f) => AsyncError(f, StackTrace.current),
+      (_) => const AsyncData(null),
+    );
+  }
+}

@@ -23,6 +23,7 @@ abstract interface class AuthRemoteDataSource {
     String newPassword,
   );
   Future<AccountModel> updateName(String name);
+  Future<void> deleteAccount();
   Future<void> signOut();
 }
 
@@ -115,6 +116,17 @@ class AuthSupabaseDataSource implements AuthRemoteDataSource {
       UserAttributes(data: {'account_name': name}),
     );
     return AccountModel.fromUser(res.user!);
+  });
+
+  @override
+  Future<void> deleteAccount() => mapSupabaseErrors(() async {
+    final userId = _auth.currentUser?.id;
+    if (userId == null || userId.isEmpty) {
+      throw const UnauthorizedException('No active account to delete.');
+    }
+
+    await _auth.admin.deleteUser(userId);
+    await _auth.signOut();
   });
 
   @override

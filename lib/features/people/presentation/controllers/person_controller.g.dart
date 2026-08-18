@@ -563,7 +563,7 @@ final personListControllerProvider =
     );
 
 typedef _$PersonListController = AutoDisposeAsyncNotifier<PersonListState>;
-String _$intakeControllerHash() => r'53c8fc54d834e71adc369b97782e619ac9c9eab4';
+String _$intakeControllerHash() => r'37bc841264d775fd32ec7a95a7e75076a87e7e17';
 
 /// See also [IntakeController].
 @ProviderFor(IntakeController)
@@ -581,7 +581,10 @@ final intakeControllerProvider =
 typedef _$IntakeController = AutoDisposeNotifier<IntakeState>;
 String _$personActionsHash() => r'67df8eddf394834249fb6cfab6131f8ca4f2f55a';
 
-/// See also [PersonActions].
+/// The file lands in storage before the person exists, so it goes
+/// under a temp folder and is re-linked once we have an id.
+///
+/// Copied from [PersonActions].
 @ProviderFor(PersonActions)
 final personActionsProvider =
     AutoDisposeNotifierProvider<PersonActions, bool>.internal(

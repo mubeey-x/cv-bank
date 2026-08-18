@@ -70,6 +70,12 @@ class AuthRepositoryImpl implements AuthRepository {
       guard(() => remote.updateName(name));
 
   @override
+  Future<Either<Failure, Unit>> deleteAccount() => guard(() async {
+    await remote.deleteAccount();
+    return unit;
+  });
+
+  @override
   Future<Either<Failure, Unit>> signOut() => guard(() async {
     await remote.signOut();
     return unit;

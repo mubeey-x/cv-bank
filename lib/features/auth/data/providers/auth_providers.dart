@@ -58,6 +58,10 @@ UpdateAccountName updateAccountName(Ref ref) =>
     UpdateAccountName(ref.watch(authRepositoryProvider));
 
 @riverpod
+DeleteAccount deleteAccount(Ref ref) =>
+    DeleteAccount(ref.watch(authRepositoryProvider));
+
+@riverpod
 SignOut signOut(Ref ref) => SignOut(ref.watch(authRepositoryProvider));
 
 @riverpod

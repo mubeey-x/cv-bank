@@ -39,5 +39,7 @@ abstract interface class AuthRepository {
 
   Future<Either<Failure, Account>> updateName(String name);
 
+  Future<Either<Failure, Unit>> deleteAccount();
+
   Future<Either<Failure, Unit>> signOut();
 }

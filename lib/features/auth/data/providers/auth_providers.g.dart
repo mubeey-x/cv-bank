@@ -165,6 +165,23 @@ final updateAccountNameProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef UpdateAccountNameRef = AutoDisposeProviderRef<UpdateAccountName>;
+String _$deleteAccountHash() => r'414ae85a96688cbacf16e645bdca3bc325cbbd00';
+
+/// See also [deleteAccount].
+@ProviderFor(deleteAccount)
+final deleteAccountProvider = AutoDisposeProvider<DeleteAccount>.internal(
+  deleteAccount,
+  name: r'deleteAccountProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$deleteAccountHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DeleteAccountRef = AutoDisposeProviderRef<DeleteAccount>;
 String _$signOutHash() => r'bef58c5e48a93d3444f1f1815f4d5983b58dbaee';
 
 /// See also [signOut].
